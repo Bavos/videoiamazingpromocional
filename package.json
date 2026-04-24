@@ -1,0 +1,21 @@
+{
+  "name": "iamazing-remotion-video",
+  "version": "1.0.0",
+  "description": "Remotion video generator for IAmazing Consultoria promo",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render IAmazingVideo out/video.mp4",
+    "preview": "remotion preview"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}
