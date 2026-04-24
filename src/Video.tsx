@@ -4,10 +4,12 @@ import { Scene2 } from "./components/Scene2";
 import { Scene3 } from "./components/Scene3";
 import { Scene4 } from "./components/Scene4";
 import { Scene5 } from "./components/Scene5";
+
+// Importacao direta do JSON
 import sceneData from "../data/sceneData.json";
 
 interface SceneProps {
-  sceneData: typeof sceneData;
+  sceneData: any;
 }
 
 const Video = ({ sceneData }: SceneProps) => {
@@ -30,9 +32,17 @@ const Video = ({ sceneData }: SceneProps) => {
     }
   };
 
+  if (!sceneData || !sceneData.scenes) {
+    return (
+      <div style={{ backgroundColor: "black", color: "white", padding: 20 }}>
+        Error: sceneData not loaded
+      </div>
+    );
+  }
+
   return (
     <div style={{ flex: 1, backgroundColor: "#000" }}>
-      {sceneData.scenes.map((scene, index) => {
+      {sceneData.scenes.map((scene: any, index: number) => {
         const Component = getSceneComponent(scene);
         const startFrame = currentFrameOffset;
         currentFrameOffset += scene.duration;
@@ -51,6 +61,11 @@ const Video = ({ sceneData }: SceneProps) => {
 };
 
 export const VideoRoot = () => {
+  if (!sceneData || !sceneData.scenes) {
+    console.error("sceneData is invalid:", sceneData);
+    return null;
+  }
+
   const totalDuration = sceneData.scenes.reduce((acc, scene) => acc + scene.duration, 0);
 
   return (
@@ -58,7 +73,7 @@ export const VideoRoot = () => {
       id="IAmazingVideo"
       component={Video}
       durationInFrames={totalDuration}
-      fps={sceneData.fps}
+      fps={sceneData.fps || 30}
       width={1920}
       height={1080}
       defaultProps={{ sceneData }}
