@@ -38,3 +38,8 @@ jobs:
           tag_name: "video-${{ github.run_number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          on:
+  push:
+    paths:
+      - "data/sceneData.json"
+  workflow_dispatch:
