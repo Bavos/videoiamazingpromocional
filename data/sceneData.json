@@ -1,8 +1,8 @@
 {
   "durationInFrames": 1350,
   "fps": 30,
-  "audioSrc": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Son_%28Raw%29.ogg",
-  "audioVolume": 0.7,
+  "audioSrc": null,
+  "audioVolume": 0,
   "scenes": [
     {
       "id": 1,
