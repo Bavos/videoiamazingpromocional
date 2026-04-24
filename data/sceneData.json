@@ -1,71 +1,113 @@
 {
-  "durationInFrames": 1350,
   "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "transitionFrames": 30,
   "scenes": [
     {
-      "id": 1,
-      "duration": 270,
+      "id": "scene1",
       "type": "opening",
-      "title": "IAmazing Consultoria",
-      "subtitle": "Inteligencia Artificial Aplicada ao Seu Crescimento",
-      "backgroundColor": "#0a0a0a",
-      "textColor": "#ffffff",
-      "accentColor": "#8b5cf6"
+      "durationInFrames": 90,
+      "fadeInDuration": 20,
+      "fadeOutDuration": 20,
+      "data": {
+        "title": "Iamazing Consultoria",
+        "subtitle": "Aplicando IA para o crescimento do seu negócio",
+        "backgroundColor": "#0A0A1A",
+        "textColor": "#FFFFFF",
+        "accentColor": "#00D4FF"
+      }
     },
     {
-      "id": 2,
-      "duration": 270,
-      "type": "content",
-      "title": "O que fazemos?",
-      "items": [
-        "Conteudo Audiovisual com IA",
-        "Automacao e Agentes Inteligentes",
-        "Educacao e Capacitacao com IA",
-        "Consultoria Estrategica"
-      ],
-      "backgroundColor": "#1e1e1e",
-      "textColor": "#ffffff",
-      "accentColor": "#8b5cf6"
+      "id": "scene2",
+      "type": "services",
+      "durationInFrames": 180,
+      "fadeInDuration": 20,
+      "fadeOutDuration": 20,
+      "data": {
+        "title": "Serviços",
+        "backgroundColor": "#0A0E27",
+        "titleColor": "#FFFFFF",
+        "itemColor": "#00D4FF",
+        "textColor": "#E0E0E0",
+        "slideStaggerFrames": 10,
+        "slideDuration": 15,
+        "items": [
+          { "text": "Conteúdo Audiovisual com IA" },
+          { "text": "Automação e Agentes Inteligentes" },
+          { "text": "Educação e Capacitação com IA" },
+          { "text": "Consultoria Estratégica" }
+        ]
+      }
     },
     {
-      "id": 3,
-      "duration": 270,
+      "id": "scene3",
       "type": "highlight",
-      "title": "Diferenciais",
-      "items": [
-        "Especialistas em IA generativa",
-        "Producao audiovisual profissional",
-        "Projetos sob medida",
-        "Atendimento humanizado"
-      ],
-      "backgroundColor": "#0f172a",
-      "textColor": "#f8fafc",
-      "accentColor": "#06b6d4"
+      "durationInFrames": 150,
+      "fadeInDuration": 20,
+      "fadeOutDuration": 20,
+      "data": {
+        "title": "Especialista",
+        "backgroundColor": "#0A0A1A",
+        "titleColor": "#00D4FF",
+        "name": "Rafael Zarvos",
+        "nameColor": "#FFFFFF",
+        "qualifications": [
+          "MBA em IA Aplicada aos Negócios",
+          "Certificação MIT em IA Generativa",
+          "Consultorias, Palestras e Mentorias"
+        ],
+        "textColor": "#C0C0C0",
+        "zoomDuration": 30
+      }
     },
     {
-      "id": 4,
-      "duration": 270,
+      "id": "scene4",
       "type": "bullets",
-      "title": "Para quem?",
-      "bullets": [
-        "Educadores que querem inovar",
-        "Empreendedores que buscam produtividade",
-        "Agencias que desejam ampliar entrega"
-      ],
-      "backgroundColor": "#18181b",
-      "textColor": "#e4e4e7",
-      "accentColor": "#ec4899"
+      "durationInFrames": 210,
+      "fadeInDuration": 20,
+      "fadeOutDuration": 20,
+      "data": {
+        "title": "O que oferecemos",
+        "backgroundColor": "#0A0E27",
+        "titleColor": "#FFFFFF",
+        "bulletColor": "#00D4FF",
+        "textColor": "#E0E0E0",
+        "bulletAppearDelay": 20,
+        "bullets": [
+          {
+            "title": "Conteúdo Audiovisual com IA",
+            "description": "Vídeos promocionais, roteiros inteligentes e produção automatizada."
+          },
+          {
+            "title": "Automação e Agentes Inteligentes",
+            "description": "Agentes de agendamento, landing pages e workflows automatizados."
+          },
+          {
+            "title": "Educação e Capacitação com IA",
+            "description": "Conteúdo para escolas, formações práticas e mentorias em ferramentas de IA."
+          },
+          {
+            "title": "Consultoria Estratégica",
+            "description": "Diagnóstico tecnológico e implementação de soluções sob medida."
+          }
+        ]
+      }
     },
     {
-      "id": 5,
-      "duration": 270,
+      "id": "scene5",
       "type": "closing",
-      "title": "Vamos conversar?",
-      "subtitle": "iamazingconsultoria.com.br",
-      "cta": "Descubra como a IA pode impulsionar seu projeto",
-      "backgroundColor": "#0f172a",
-      "textColor": "#ffffff",
-      "accentColor": "#8b5cf6"
+      "durationInFrames": 90,
+      "fadeInDuration": 20,
+      "fadeOutDuration": 30,
+      "data": {
+        "title": "Iamazing",
+        "subtitle": "Transforme seu negócio com IA",
+        "callToAction": "Visite iamazing.com.br",
+        "backgroundColor": "#0A0A1A",
+        "textColor": "#FFFFFF",
+        "accentColor": "#00D4FF"
+      }
     }
   ]
 }
