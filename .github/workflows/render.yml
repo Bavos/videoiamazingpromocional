@@ -2,6 +2,8 @@ name: Render Remotion Video
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "data/sceneData.json"
   workflow_dispatch:
@@ -26,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build TypeScript
+      - name: Type check
         run: npm run build
 
       - name: Render video
@@ -39,9 +41,4 @@ jobs:
           path: out/video.mp4
 
       - name: Publish release with MP4
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: iamazing-render-${{ github.run_number }}
-          name: Iamazing Render ${{ github.run_number }}
-          body: Render automático do vídeo Remotion baseado em data/sceneData.json.
-          files: out/video.mp4
+        uses: soft
