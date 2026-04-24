@@ -1,43 +1,26 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { useCurrentFrame, interpolate, AbsoluteFill } from "remotion";
 
-export const Scene1 = ({ scene, startFrame }: any) => {
-  const frame = useCurrentFrame();
-  const relativeFrame = frame - startFrame;
-  const opacity = interpolate(relativeFrame, [0, 30], [0, 1]);
+interface SceneProps {
+  scene: any;
+  startFrame: number;
+}
+
+export const Scene1 = ({ scene, startFrame }: SceneProps) => {
+  const frame = useCurrentFrame() - startFrame;
+  const { title, subtitle, backgroundColor, textColor, accentColor } = scene.data;
+  const fadeIn = scene.fadeInDuration || 20;
+
+  const opacity = interpolate(frame, [0, fadeIn], [0, 1], { extrapolateRight: "clamp" });
+  const fadeOutStart = scene.durationInFrames - (scene.fadeOutDuration || 20);
+  const opacityOut = interpolate(frame, [fadeOutStart, scene.durationInFrames], [1, 0], { extrapolateLeft: "clamp" });
+
+  const finalOpacity = Math.min(opacity, opacityOut);
 
   return (
-    <AbsoluteFill
-      style={{
-        background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)",
-        justifyContent: "center",
-        alignItems: "center",
-        opacity,
-      }}
-    >
+    <AbsoluteFill style={{ backgroundColor, display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div style={{ textAlign: "center" }}>
-        <h1
-          style={{
-            fontSize: 90,
-            fontWeight: "bold",
-            background: "linear-gradient(135deg, #8b5cf6, #06b6d4)",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-            fontFamily: "sans-serif",
-          }}
-        >
-          IAmazing
-        </h1>
-        <p
-          style={{
-            fontSize: 32,
-            color: "#cbd5e1",
-            marginTop: 20,
-            fontFamily: "sans-serif",
-          }}
-        >
-          Inteligência Artificial Aplicada ao Seu Crescimento
-        </p>
+        <h1 style={{ color: textColor, fontSize: 80, margin: 0, opacity: finalOpacity }}>{title}</h1>
+        <h2 style={{ color: accentColor, fontSize: 40, marginTop: 20, opacity: finalOpacity }}>{subtitle}</h2>
       </div>
     </AbsoluteFill>
   );
