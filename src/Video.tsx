@@ -10,11 +10,7 @@ interface SceneProps {
   sceneData: typeof sceneData;
 }
 
-// Componente Video refatorado: ele recebe a prop sceneData e contem toda a logica de cenas E o Audio
 const Video = ({ sceneData }: SceneProps) => {
-  // Importe Audio e useCurrentFrame aqui dentro, se precisar
-  const { Audio } = require("remotion"); // Ou importe no topo: import { Audio } from "remotion";
-  
   let currentFrameOffset = 0;
 
   const getSceneComponent = (scene: any) => {
@@ -35,39 +31,32 @@ const Video = ({ sceneData }: SceneProps) => {
   };
 
   return (
-    <>
-      {/* Audio agora esta dentro do componente que representa a composicao */}
-      {sceneData.audioSrc && (
-        <Audio src={sceneData.audioSrc} volume={sceneData.audioVolume} />
-      )}
-      <div style={{ flex: 1, backgroundColor: "#000" }}>
-        {sceneData.scenes.map((scene, index) => {
-          const Component = getSceneComponent(scene);
-          const startFrame = currentFrameOffset;
-          currentFrameOffset += scene.duration;
+    <div style={{ flex: 1, backgroundColor: "#000" }}>
+      {sceneData.scenes.map((scene, index) => {
+        const Component = getSceneComponent(scene);
+        const startFrame = currentFrameOffset;
+        currentFrameOffset += scene.duration;
 
-          return (
-            <Component
-              key={scene.id}
-              scene={scene}
-              startFrame={startFrame}
-              durationInFrames={scene.duration}
-            />
-          );
-        })}
-      </div>
-    </>
+        return (
+          <Component
+            key={scene.id}
+            scene={scene}
+            startFrame={startFrame}
+            durationInFrames={scene.duration}
+          />
+        );
+      })}
+    </div>
   );
 };
 
-// Componente Root que registra a composicao
 export const VideoRoot = () => {
   const totalDuration = sceneData.scenes.reduce((acc, scene) => acc + scene.duration, 0);
 
   return (
     <Composition
       id="IAmazingVideo"
-      component={Video} // A referencia correta para o componente de video
+      component={Video}
       durationInFrames={totalDuration}
       fps={sceneData.fps}
       width={1920}
