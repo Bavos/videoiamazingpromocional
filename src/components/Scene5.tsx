@@ -1,4 +1,4 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, interpolate, useCurrentFrame, spring } from "remotion";
 
 interface SceneProps {
   scene: any;
@@ -10,64 +10,116 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
   const frame = useCurrentFrame();
   const relativeFrame = frame - startFrame;
 
-  const opacity = interpolate(relativeFrame, [0, 30, durationInFrames - 30, durationInFrames], [1, 1, 0, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
+  // Animações mais elegantes
+  const titleOpacity = interpolate(relativeFrame, [0, 20], [0, 1]);
+  const titleScale = spring({
+    frame: relativeFrame,
+    fps: 30,
+    config: { damping: 12, mass: 0.5 },
   });
 
-  const pulseScale = interpolate(relativeFrame, [0, 30, 60], [1, 1.05, 1], {
-    extrapolateRight: "clamp",
-    loop: true,
+  const ctaScale = spring({
+    frame: relativeFrame - 15,
+    fps: 30,
+    config: { damping: 10 },
   });
+
+  const urlOpacity = interpolate(relativeFrame, [30, 50], [0, 1]);
+
+  // Cor roxa/azul da IAmazing (baseado no site)
+  const brandColor = "#8b5cf6"; // Roxo da marca
+  const darkBg = "#0f172a"; // Fundo escuro profissional
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: scene.backgroundColor,
+        backgroundColor: darkBg,
         justifyContent: "center",
         alignItems: "center",
-        opacity,
+        flexDirection: "column",
       }}
     >
+      {/* Linha decorativa superior */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 8,
+          background: `linear-gradient(90deg, ${brandColor}, #06b6d4, ${brandColor})`,
+        }}
+      />
+
+      {/* Título principal */}
       <h1
         style={{
-          fontSize: 64,
+          fontSize: 72,
           fontWeight: "bold",
-          color: scene.accentColor,
-          marginBottom: 20,
           fontFamily: "sans-serif",
+          background: `linear-gradient(135deg, ${brandColor}, #a855f7)`,
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          opacity: titleOpacity,
+          transform: `scale(${titleScale})`,
+          marginBottom: 30,
         }}
       >
         {scene.title}
       </h1>
-      <p
-        style={{
-          fontSize: 28,
-          color: scene.textColor,
-          marginBottom: 40,
-          fontFamily: "sans-serif",
-        }}
-      >
-        {scene.cta}
-      </p>
+
+      {/* CTA - Botão estilizado */}
       <div
         style={{
-          transform: `scale(${pulseScale})`,
-          padding: "20px 40px",
-          backgroundColor: scene.accentColor,
-          borderRadius: 50,
+          backgroundColor: brandColor,
+          padding: "20px 50px",
+          borderRadius: 60,
+          transform: `scale(${ctaScale})`,
+          boxShadow: "0 10px 40px rgba(139, 92, 246, 0.3)",
+          marginBottom: 50,
         }}
       >
         <p
           style={{
-            fontSize: 32,
+            fontSize: 28,
             color: "#ffffff",
             fontWeight: "bold",
             fontFamily: "sans-serif",
+            margin: 0,
           }}
         >
-          {scene.subtitle}
+          {scene.cta}
         </p>
+      </div>
+
+      {/* URL do site */}
+      <p
+        style={{
+          fontSize: 32,
+          color: "#94a3b8",
+          fontFamily: "monospace",
+          opacity: urlOpacity,
+          letterSpacing: 1,
+        }}
+      >
+        {scene.subtitle}
+      </p>
+
+      {/* Linha decorativa inferior */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 4,
+          background: `linear-gradient(90deg, transparent, ${brandColor}, transparent)`,
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
       </div>
     </AbsoluteFill>
   );
