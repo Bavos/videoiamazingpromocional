@@ -8,24 +8,10 @@ import { Scene5 } from "./components/Scene5";
 
 const scenes = sceneData.scenes;
 
-const totalDuration = scenes.reduce((acc, scene) => acc + scene.durationInFrames, 0);
-
-export const Video = () => {
-  return null;
-};
-
-export const IamazingVideo = () => {
-  return (
-    <Composition
-      id="iamazing"
-      component={FullVideo}
-      durationInFrames={totalDuration}
-      fps={sceneData.fps}
-      width={sceneData.width}
-      height={sceneData.height}
-    />
-  );
-};
+const totalDuration = scenes.reduce(
+  (acc, scene) => acc + scene.durationInFrames,
+  0
+);
 
 const FullVideo = () => {
   return (
@@ -52,5 +38,18 @@ const FullVideo = () => {
         }
       })}
     </div>
+  );
+};
+
+export const Video = () => {
+  return (
+    <Composition
+      id="iamazing"
+      component={FullVideo}
+      durationInFrames={totalDuration}
+      fps={sceneData.fps}
+      width={sceneData.width}
+      height={sceneData.height}
+    />
   );
 };
