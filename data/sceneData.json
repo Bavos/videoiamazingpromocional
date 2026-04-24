@@ -1,0 +1,120 @@
+{
+  "video": {
+    "id": "Video",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "durationInSeconds": 40,
+    "backgroundColor": "#090B10",
+    "fontFamily": "Arial, sans-serif",
+    "transitionFrames": 18,
+    "titleLetterSpacing": 1.2
+  },
+  "scenes": [
+    {
+      "id": "scene1",
+      "durationInSeconds": 8,
+      "backgroundColor": "#0A1426",
+      "accentColor": "#45D0FF",
+      "title": "Iamazing Consultoria",
+      "subtitle": "Aplicamos IA para acelerar o crescimento de negócios com clareza, estratégia e execução.",
+      "animation": {
+        "enterY": 80,
+        "exitY": -60,
+        "titleScaleFrom": 0.9,
+        "titleScaleTo": 1,
+        "subtitleOpacityFrom": 0,
+        "subtitleOpacityTo": 1,
+        "fadeOutStartPercent": 0.78
+      }
+    },
+    {
+      "id": "scene2",
+      "durationInSeconds": 8,
+      "backgroundColor": "#131A2E",
+      "accentColor": "#86FFB7",
+      "title": "Conteúdo Audiovisual com IA",
+      "bullets": [
+        "vídeos promocionais",
+        "roteiros inteligentes",
+        "produção automatizada"
+      ],
+      "animation": {
+        "listStartY": 390,
+        "itemGap": 84,
+        "itemSlideX": 120,
+        "fadeOutStartPercent": 0.82,
+        "titleY": 250
+      }
+    },
+    {
+      "id": "scene3",
+      "durationInSeconds": 8,
+      "backgroundColor": "#1A1231",
+      "accentColor": "#C89CFF",
+      "title": "Automação e Agentes Inteligentes",
+      "bullets": [
+        "agentes de agendamento",
+        "atendimento automatizado",
+        "landing pages",
+        "workflows automatizados"
+      ],
+      "animation": {
+        "cardsPerRow": 2,
+        "cardWidth": 700,
+        "cardHeight": 170,
+        "cardGapX": 60,
+        "cardGapY": 40,
+        "gridStartY": 360,
+        "fadeOutStartPercent": 0.82
+      }
+    },
+    {
+      "id": "scene4",
+      "durationInSeconds": 8,
+      "backgroundColor": "#10201A",
+      "accentColor": "#F9D76E",
+      "title": "Educação, Capacitação e Consultoria Estratégica",
+      "bullets": [
+        "conteúdo para escolas e professores",
+        "formações práticas",
+        "mentorias",
+        "diagnóstico tecnológico",
+        "implementação de IA sob medida"
+      ],
+      "animation": {
+        "fadeOutStartPercent": 0.82,
+        "lineHeight": 1.3,
+        "titleY": 200,
+        "listStartY": 320,
+        "listStep": 110
+      }
+    },
+    {
+      "id": "scene5",
+      "durationInSeconds": 8,
+      "backgroundColor": "#1B1212",
+      "accentColor": "#FF9671",
+      "title": "Encerramento",
+      "targetTitle": "Público-alvo",
+      "targetAudience": [
+        "educadores",
+        "empreendedores",
+        "agências"
+      ],
+      "specialistName": "Rafael Zarvos",
+      "specialistTitle": "Especialista em IA aplicada para resultados reais",
+      "credentials": [
+        "MBA em IA Aplicada aos Negócios",
+        "Certificação MIT em IA Generativa",
+        "atuação em consultoria, palestras e mentorias"
+      ],
+      "animation": {
+        "fadeOutStartPercent": 0.9,
+        "leftColumnX": 180,
+        "rightColumnX": 990,
+        "contentY": 290
+      }
+    }
+  ]
+}
