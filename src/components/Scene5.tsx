@@ -1,65 +1,25 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { useCurrentFrame, interpolate, AbsoluteFill } from "remotion";
 
 interface SceneProps {
   scene: any;
   startFrame: number;
-  durationInFrames: number;
 }
 
 export const Scene5 = ({ scene, startFrame }: SceneProps) => {
-  const frame = useCurrentFrame();
-  const relativeFrame = frame - startFrame;
+  const frame = useCurrentFrame() - startFrame;
+  const { title, subtitle, callToAction, backgroundColor, textColor, accentColor } = scene.data;
 
-  const opacity = interpolate(relativeFrame, [0, 30, 230, 270], [0, 1, 1, 0]);
+  const fadeIn = scene.fadeInDuration || 20;
+  const fadeOutStart = scene.durationInFrames - (scene.fadeOutDuration || 30);
+  const fadeOut = interpolate(frame, [fadeOutStart, scene.durationInFrames], [1, 0], { extrapolateLeft: "clamp" });
+  const fadeInVal = interpolate(frame, [0, fadeIn], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = Math.min(fadeInVal, fadeOut);
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: "#0f172a",
-        justifyContent: "center",
-        alignItems: "center",
-        opacity: opacity,
-      }}
-    >
-      <h1
-        style={{
-          fontSize: 64,
-          fontWeight: "bold",
-          color: "#8b5cf6",
-          marginBottom: 30,
-        }}
-      >
-        {scene.title}
-      </h1>
-
-      <div
-        style={{
-          backgroundColor: "#8b5cf6",
-          padding: "15px 40px",
-          borderRadius: 50,
-          marginBottom: 40,
-        }}
-      >
-        <p
-          style={{
-            fontSize: 24,
-            color: "#ffffff",
-            fontWeight: "bold",
-            margin: 0,
-          }}
-        >
-          {scene.cta}
-        </p>
-      </div>
-
-      <p
-        style={{
-          fontSize: 28,
-          color: "#94a3b8",
-        }}
-      >
-        {scene.subtitle}
-      </p>
+    <AbsoluteFill style={{ backgroundColor, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <h1 style={{ color: textColor, fontSize: 80, margin: 0, opacity }}>{title}</h1>
+      <h2 style={{ color: accentColor, fontSize: 44, marginTop: 20, opacity }}>{subtitle}</h2>
+      <p style={{ color: textColor, fontSize: 32, marginTop: 60, opacity }}>{callToAction}</p>
     </AbsoluteFill>
   );
 };
