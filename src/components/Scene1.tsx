@@ -1,55 +1,44 @@
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 
-interface SceneProps {
-  scene: any;
-  startFrame: number;
-  durationInFrames: number;
-}
-
-export const Scene1 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
+export const Scene1 = ({ scene, startFrame }: any) => {
   const frame = useCurrentFrame();
   const relativeFrame = frame - startFrame;
-
-  const opacity = interpolate(relativeFrame, [0, 30], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  const titleScale = interpolate(relativeFrame, [0, 30], [0.8, 1], {
-    extrapolateRight: "clamp",
-  });
+  const opacity = interpolate(relativeFrame, [0, 30], [0, 1]);
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: scene.backgroundColor,
+        background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)",
         justifyContent: "center",
         alignItems: "center",
         opacity,
       }}
     >
-      <h1
-        style={{
-          fontSize: 72,
-          fontWeight: "bold",
-          color: scene.accentColor,
-          transform: `scale(${titleScale})`,
-          marginBottom: 20,
-          fontFamily: "sans-serif",
-        }}
-      >
-        {scene.title}
-      </h1>
-      <p
-        style={{
-          fontSize: 32,
-          color: scene.textColor,
-          textAlign: "center",
-          maxWidth: "80%",
-          fontFamily: "sans-serif",
-        }}
-      >
-        {scene.subtitle}
-      </p>
+      <div style={{ textAlign: "center" }}>
+        <h1
+          style={{
+            fontSize: 90,
+            fontWeight: "bold",
+            background: "linear-gradient(135deg, #8b5cf6, #06b6d4)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            fontFamily: "sans-serif",
+          }}
+        >
+          IAmazing
+        </h1>
+        <p
+          style={{
+            fontSize: 32,
+            color: "#cbd5e1",
+            marginTop: 20,
+            fontFamily: "sans-serif",
+          }}
+        >
+          Inteligência Artificial Aplicada ao Seu Crescimento
+        </p>
+      </div>
     </AbsoluteFill>
   );
 };
