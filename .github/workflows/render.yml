@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: "20"
 
-      - - name: Install dependencies
-          run: npm install
+      - name: Install dependencies
+        run: npm install
 
       - name: Render video
         run: npx remotion render src/index.ts out/video.mp4 --props=data/sceneData.json
