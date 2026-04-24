@@ -4,8 +4,8 @@
   "private": true,
   "description": "Projeto Remotion v4 para gerar vídeo dinâmico com dados JSON",
   "scripts": {
-    "build": "remotion bundle",
-    "render": "remotion render src/Video.tsx Video out/video.mp4"
+    "build": "remotion bundle src/index.ts --out-dir build",
+    "render": "remotion render src/index.ts Video out/video.mp4"
   },
   "dependencies": {
     "remotion": "^4.0.0",
