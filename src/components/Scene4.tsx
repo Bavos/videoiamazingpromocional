@@ -1,84 +1,37 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { useCurrentFrame, interpolate, AbsoluteFill } from "remotion";
 
 interface SceneProps {
   scene: any;
   startFrame: number;
-  durationInFrames: number;
 }
 
-export const Scene4 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
-  const frame = useCurrentFrame();
-  const relativeFrame = frame - startFrame;
+export const Scene4 = ({ scene, startFrame }: SceneProps) => {
+  const frame = useCurrentFrame() - startFrame;
+  const { title, backgroundColor, titleColor, bulletColor, textColor, bulletAppearDelay, bullets } = scene.data;
+
+  const fadeIn = scene.fadeInDuration || 20;
+  const fadeOutStart = scene.durationInFrames - (scene.fadeOutDuration || 20);
+  const fadeOut = interpolate(frame, [fadeOutStart, scene.durationInFrames], [1, 0], { extrapolateLeft: "clamp" });
+  const fadeInVal = interpolate(frame, [0, fadeIn], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = Math.min(fadeInVal, fadeOut);
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: scene.backgroundColor,
-        padding: 60,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h2
-        style={{
-          fontSize: 48,
-          color: scene.accentColor,
-          marginBottom: 60,
-          textAlign: "center",
-          fontFamily: "sans-serif",
-        }}
-      >
-        {scene.title}
-      </h2>
-      <div>
-        {scene.bullets.map((bullet: string, index: number) => {
-          const bulletDelay = index * 20;
-          const bulletOpacity = interpolate(
-            relativeFrame,
-            [bulletDelay, bulletDelay + 15],
-            [0, 1],
-            { extrapolateRight: "clamp" }
-          );
-          const bulletSlide = interpolate(
-            relativeFrame,
-            [bulletDelay, bulletDelay + 15],
-            [100, 0],
-            { extrapolateRight: "clamp" }
-          );
-
-          return (
-            <div
-              key={index}
-              style={{
-                opacity: bulletOpacity,
-                transform: `translateX(${bulletSlide}px)`,
-                marginBottom: 30,
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: 24,
-                  height: 24,
-                  backgroundColor: scene.accentColor,
-                  borderRadius: 12,
-                  marginRight: 20,
-                }}
-              />
-              <p
-                style={{
-                  fontSize: 28,
-                  color: scene.textColor,
-                  fontFamily: "sans-serif",
-                }}
-              >
-                {bullet}
-              </p>
+    <AbsoluteFill style={{ backgroundColor, display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: 120 }}>
+      <h1 style={{ color: titleColor, fontSize: 56, marginBottom: 60, opacity }}>{title}</h1>
+      {bullets.map((b: any, i: number) => {
+        const start = i * bulletAppearDelay;
+        const bulletOpacity = interpolate(frame, [start, start + 15], [0, 1], { extrapolateRight: "clamp" });
+        const slideX = interpolate(frame, [start, start + 15], [50, 0], { extrapolateRight: "clamp" });
+        return (
+          <div key={i} style={{ display: "flex", alignItems: "flex-start", marginBottom: 40, opacity: bulletOpacity * opacity, transform: `translateX(${slideX}px)` }}>
+            <div style={{ width: 14, height: 14, backgroundColor: bulletColor, borderRadius: "50%", marginRight: 20, marginTop: 8, flexShrink: 0 }} />
+            <div>
+              <h2 style={{ color: bulletColor, fontSize: 34, margin: 0, marginBottom: 8 }}>{b.title}</h2>
+              <p style={{ color: textColor, fontSize: 26, margin: 0, maxWidth: 1200 }}>{b.description}</p>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </AbsoluteFill>
   );
 };
