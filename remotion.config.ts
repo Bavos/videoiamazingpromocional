@@ -1,4 +1,9 @@
 import { Config } from "@remotion/cli/config";
 
-Config.setVideoImageFormat("h264");
-Config.setOverwriteOutput(true);
+Config.overrideWebpackConfig((currentConfiguration) => {
+  return currentConfiguration;
+});
+
+Config.setBrowserExecutable(null);
+Config.setChromiumDisableWebSecurity(false);
+Config.setConcurrency(4);
