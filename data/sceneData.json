@@ -1,12 +1,71 @@
 {
-  "id": 5,
-  "duration": 270,
-  "type": "closing",
-  "title": "Vamos conversar?",
-  "subtitle": "iamazingconsultoria.com.br",
-  "cta": "Descubra como a IA pode impulsionar seu projeto",
-  "backgroundColor": "#0f172a",
-  "textColor": "#ffffff",
-  "accentColor": "#8b5cf6",
-  "animation": "fadeOut"
+  "durationInFrames": 1350,
+  "fps": 30,
+  "scenes": [
+    {
+      "id": 1,
+      "duration": 270,
+      "type": "opening",
+      "title": "IAmazing Consultoria",
+      "subtitle": "Inteligencia Artificial Aplicada ao Seu Crescimento",
+      "backgroundColor": "#0a0a0a",
+      "textColor": "#ffffff",
+      "accentColor": "#8b5cf6"
+    },
+    {
+      "id": 2,
+      "duration": 270,
+      "type": "content",
+      "title": "O que fazemos?",
+      "items": [
+        "Conteudo Audiovisual com IA",
+        "Automacao e Agentes Inteligentes",
+        "Educacao e Capacitacao com IA",
+        "Consultoria Estrategica"
+      ],
+      "backgroundColor": "#1e1e1e",
+      "textColor": "#ffffff",
+      "accentColor": "#8b5cf6"
+    },
+    {
+      "id": 3,
+      "duration": 270,
+      "type": "highlight",
+      "title": "Diferenciais",
+      "items": [
+        "Especialistas em IA generativa",
+        "Producao audiovisual profissional",
+        "Projetos sob medida",
+        "Atendimento humanizado"
+      ],
+      "backgroundColor": "#0f172a",
+      "textColor": "#f8fafc",
+      "accentColor": "#06b6d4"
+    },
+    {
+      "id": 4,
+      "duration": 270,
+      "type": "bullets",
+      "title": "Para quem?",
+      "bullets": [
+        "Educadores que querem inovar",
+        "Empreendedores que buscam produtividade",
+        "Agencias que desejam ampliar entrega"
+      ],
+      "backgroundColor": "#18181b",
+      "textColor": "#e4e4e7",
+      "accentColor": "#ec4899"
+    },
+    {
+      "id": 5,
+      "duration": 270,
+      "type": "closing",
+      "title": "Vamos conversar?",
+      "subtitle": "iamazingconsultoria.com.br",
+      "cta": "Descubra como a IA pode impulsionar seu projeto",
+      "backgroundColor": "#0f172a",
+      "textColor": "#ffffff",
+      "accentColor": "#8b5cf6"
+    }
+  ]
 }
