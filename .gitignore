@@ -1,8 +1,0 @@
-node_modules/
-dist/
-out/
-.vscode/
-.DS_Store
-*.log
-.env
-remotion.json
