@@ -23,13 +23,10 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Fix npm registry
-        run: npm config set registry https://registry.npmjs.org/
-
       - name: Install dependencies
-        run: npm install --registry=https://registry.npmjs.org/
+        run: npm install
 
-      - name: Build bundle
+      - name: Build TypeScript
         run: npm run build
 
       - name: Render video
