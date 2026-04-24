@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - - name: Render video
+      - name: Render video
         run: npx remotion render src/index.ts iamazing out/video.mp4 --props=data/sceneData.json
 
       - name: Upload artifact
