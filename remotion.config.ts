@@ -1,4 +1,4 @@
 import { Config } from "@remotion/cli/config";
 
-Config.setVideoImageFormat("mp4");
+Config.setVideoImageFormat("h264");
 Config.setOverwriteOutput(true);
