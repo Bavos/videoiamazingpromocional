@@ -16,10 +16,7 @@ jobs:
         with:
           node-version: '20'
       
-      - name: Generate package-lock.json
-        run: npm install --package-lock-only
-      
-      - run: npm ci
+      - run: npm install
       
       - run: npm run build
       
@@ -27,3 +24,10 @@ jobs:
         with:
           name: iamazing-promo-video
           path: out/video.mp4
+          retention-days: 30
+      
+      - name: Create Release on Tag
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/video.mp4
