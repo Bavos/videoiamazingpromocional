@@ -1,77 +1,34 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { useCurrentFrame, interpolate, AbsoluteFill } from "remotion";
 
 interface SceneProps {
   scene: any;
   startFrame: number;
-  durationInFrames: number;
 }
 
-export const Scene3 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
-  const frame = useCurrentFrame();
-  const relativeFrame = frame - startFrame;
+export const Scene3 = ({ scene, startFrame }: SceneProps) => {
+  const frame = useCurrentFrame() - startFrame;
+  const { title, backgroundColor, titleColor, name, nameColor, qualifications, textColor, zoomDuration } = scene.data;
 
-  const zoom = interpolate(relativeFrame, [0, 40], [1.2, 1], {
-    extrapolateRight: "clamp",
-  });
+  const fadeIn = scene.fadeInDuration || 20;
+  const fadeOutStart = scene.durationInFrames - (scene.fadeOutDuration || 20);
+  const fadeOut = interpolate(frame, [fadeOutStart, scene.durationInFrames], [1, 0], { extrapolateLeft: "clamp" });
+  const fadeInVal = interpolate(frame, [0, fadeIn], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = Math.min(fadeInVal, fadeOut);
+
+  const zoom = interpolate(frame, [0, zoomDuration], [1.2, 1], { extrapolateRight: "clamp" });
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: scene.backgroundColor,
-        padding: 60,
-      }}
-    >
-      <h2
-        style={{
-          fontSize: 48,
-          color: scene.accentColor,
-          marginBottom: 50,
-          textAlign: "center",
-          fontFamily: "sans-serif",
-        }}
-      >
-        {scene.title}
-      </h2>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 40,
-          transform: `scale(${zoom})`,
-        }}
-      >
-        {scene.items.map((item: string, index: number) => {
-          const cardDelay = index * 10;
-          const cardOpacity = interpolate(
-            relativeFrame,
-            [cardDelay, cardDelay + 20],
-            [0, 1],
-            { extrapolateRight: "clamp" }
-          );
-
-          return (
-            <div
-              key={index}
-              style={{
-                backgroundColor: "#2d2d2d",
-                padding: 30,
-                borderRadius: 16,
-                textAlign: "center",
-                opacity: cardOpacity,
-              }}
-            >
-              <p
-                style={{
-                  fontSize: 24,
-                  color: scene.textColor,
-                  fontFamily: "sans-serif",
-                }}
-              >
-                {item}
-              </p>
-            </div>
-          );
-        })}
+    <AbsoluteFill style={{ backgroundColor, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <h2 style={{ color: titleColor, fontSize: 48, marginBottom: 30, opacity }}>{title}</h2>
+      <div style={{ transform: `scale(${zoom})`, opacity }}>
+        <h1 style={{ color: nameColor, fontSize: 72, marginBottom: 40 }}>{name}</h1>
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {qualifications.map((q: string, i: number) => (
+            <li key={i} style={{ color: textColor, fontSize: 32, marginBottom: 15 }}>
+              {q}
+            </li>
+          ))}
+        </ul>
       </div>
     </AbsoluteFill>
   );
