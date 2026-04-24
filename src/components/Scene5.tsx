@@ -10,8 +10,8 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
   const frame = useCurrentFrame();
   const relativeFrame = frame - startFrame;
 
-  // Animações mais elegantes
   const titleOpacity = interpolate(relativeFrame, [0, 20], [0, 1]);
+  
   const titleScale = spring({
     frame: relativeFrame,
     fps: 30,
@@ -26,9 +26,8 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
 
   const urlOpacity = interpolate(relativeFrame, [30, 50], [0, 1]);
 
-  // Cor roxa/azul da IAmazing (baseado no site)
-  const brandColor = "#8b5cf6"; // Roxo da marca
-  const darkBg = "#0f172a"; // Fundo escuro profissional
+  const brandColor = "#8b5cf6";
+  const darkBg = "#0f172a";
 
   return (
     <AbsoluteFill
@@ -36,10 +35,9 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
         backgroundColor: darkBg,
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
+        flexDirection: "column" as const,
       }}
     >
-      {/* Linha decorativa superior */}
       <div
         style={{
           position: "absolute",
@@ -51,15 +49,14 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
         }}
       />
 
-      {/* Título principal */}
       <h1
         style={{
           fontSize: 72,
           fontWeight: "bold",
           fontFamily: "sans-serif",
           background: `linear-gradient(135deg, ${brandColor}, #a855f7)`,
-          backgroundClip: "text",
           WebkitBackgroundClip: "text",
+          backgroundClip: "text",
           color: "transparent",
           opacity: titleOpacity,
           transform: `scale(${titleScale})`,
@@ -69,7 +66,6 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
         {scene.title}
       </h1>
 
-      {/* CTA - Botão estilizado */}
       <div
         style={{
           backgroundColor: brandColor,
@@ -93,7 +89,6 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
         </p>
       </div>
 
-      {/* URL do site */}
       <p
         style={{
           fontSize: 32,
@@ -106,7 +101,6 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
         {scene.subtitle}
       </p>
 
-      {/* Linha decorativa inferior */}
       <div
         style={{
           position: "absolute",
@@ -117,10 +111,6 @@ export const Scene5 = ({ scene, startFrame, durationInFrames }: SceneProps) => {
           background: `linear-gradient(90deg, transparent, ${brandColor}, transparent)`,
         }}
       />
-    </AbsoluteFill>
-  );
-};
-      </div>
     </AbsoluteFill>
   );
 };
